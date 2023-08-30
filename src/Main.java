@@ -26,9 +26,10 @@ public class Main {
                 .collect(Collectors.toList());
 
         List<Person> workers = persons.stream()
-                .filter(person -> (person.getSex().equals(Sex.WOMAN) && (person.getAge() >= 18 && person.getAge() <= 60) && (person.getEducation().equals(Education.HIGHER))) || (person.getSex().equals(Sex.MAN) && (person.getAge() >= 18 && person.getAge() <= 65) && (person.getEducation().equals(Education.HIGHER))))
-                .sorted(Comparator.comparing(Person::getFamily)).collect(Collectors.toList());
-
+                .filter(person -> person.getEducation() == Education.HIGHER)
+                .filter(person -> person.getAge() >= 18)
+                .filter(person -> person.getSex() == Sex.WOMAN ? person.getAge() <= 60 : person.getAge() <= 65)
+                .collect(Collectors.toList());
         /*
         // блок контроля/проверки на меньших входных данных
         System.out.println("Число детей "+kidsCounter);
